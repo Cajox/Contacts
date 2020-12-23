@@ -23,7 +23,7 @@ class ContactController extends Controller
 
     }
 
-    public function createContact(Request $request)
+    public function createContact(CreateContactRequest $request)
     {
         return $this->contactService->createContacts($request->all());
     }
