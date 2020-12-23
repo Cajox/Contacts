@@ -23,7 +23,10 @@ class ContactRepository implements ContactInterface {
 
     public function create(array $attributes): ?Model
     {
-        return $this->contactModel->create($attributes);
+        return $this->contactModel->create([
+            'first_name' => $attributes['first_name'],
+            'last_name' => $attributes['last_name']
+        ]);
 
 
     }
