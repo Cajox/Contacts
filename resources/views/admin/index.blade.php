@@ -16,7 +16,7 @@
         <tbody data-bind="foreach: contacts">
         <tr>
             <td>
-                <input data-bind='value: first_name' />
+                <input name="first_name" data-bind='value: first_name' />
                 <div><a href='#' data-bind='click: $root.removeContact'>Delete</a></div>
             </td>
             <td><input data-bind='value: last_name' /></td>
@@ -95,17 +95,18 @@
         // })
 
         self.save = function() {
-
+            console.log(ko.toJS(self.contacts))
+            // console.log(ko.toJS(self.contacts)/*, null, 2*/)
+            var contacts = ko.toJS(self.contacts);
             $.ajax({
                 type: "POST",
                 url: '/contacts/create',
                 data: { contacts, _token: '{{csrf_token()}}' },
-                success: function (data) {
-                    console.log(data);
+                success: function () {
+                    alert('success');
                 },
-                error: function (data, textStatus, errorThrown) {
-                    console.log(data);
-
+                error: function () {
+                    alert('error');
                 },
             });
 
