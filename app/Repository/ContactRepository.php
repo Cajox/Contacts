@@ -21,16 +21,10 @@ class ContactRepository implements ContactInterface {
         // TODO: Implement all() method.
     }
 
-    public function create(array $attributes): ?bool
+    public function create(array $attributes): ?Model
     {
+        return $this->contactModel->create($attributes);
 
-        foreach ($attributes as $attribute){
-
-            $this->contactModel->create($attribute);
-
-        }
-
-        return true;
 
     }
 

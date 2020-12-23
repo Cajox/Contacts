@@ -23,7 +23,14 @@ class ContactService{
 
     public function createContacts($attributes)
     {
-        return $this->contactRepository->create($attributes['contacts']);
+        foreach ($attributes['contacts'] as $attribute)
+        {
+           $contact = $this->contactRepository->create($attribute);
+
+        }
+
+        return true;
+
     }
 
 
