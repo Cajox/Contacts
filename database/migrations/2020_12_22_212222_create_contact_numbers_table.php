@@ -16,8 +16,8 @@ class CreateContactNumbersTable extends Migration
         Schema::create('contact_numbers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('contact_id');
-            $table->string('type');
-            $table->string('phone_number');
+            $table->string('type')->nullable();
+            $table->string('phone_number')->nullable();
             $table->timestamps();
         });
     }

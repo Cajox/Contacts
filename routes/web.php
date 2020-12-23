@@ -22,6 +22,10 @@ Route::get('/test', function () {
     return view('admin.index');
 });
 
+Route::get('/tesst', function () {
+    return view('contacts');
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
