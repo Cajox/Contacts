@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TestRequest;
+use App\Http\Requests\CreateContactRequest;
 use App\Services\ContactService;
 use Illuminate\Http\Request;
 
