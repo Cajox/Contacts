@@ -40,9 +40,13 @@ class ContactService{
 
                $contact = $this->contactRepository->create($attribute);
 
-               foreach ($attribute['phones'] as $phone){
+               if (array_key_exists('phones', $attribute)){
 
-                   $this->contactNumberRepository->create($contact->id, $phone['type'] , $phone['number']);
+                   foreach ($attribute['phones'] as $phone){
+
+                       $this->contactNumberRepository->create($contact->id, $phone['type'] , $phone['number']);
+
+                   }
 
                }
 
