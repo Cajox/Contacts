@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    return view('admin.index');
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::prefix('contacts')->group(function (){
+    Route::get('/all', [ContactController::class, 'getAllContacts']);
+    Route::post('/create', [ContactController::class, 'createContact']);
+});
