@@ -1,5 +1,7 @@
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"
-        type = "text/javascript"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" type = "text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
 {{--<head>
     <title>KnockoutJS Submit Binding</title>
     <script src = "https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"
@@ -24,8 +26,8 @@
                 <table>
                     <tbody data-bind="foreach: phones">
                     <tr>
-                        <td><input data-bind='value: type' /></td>
-                        <td><input data-bind='value: number' /></td>
+                        <td><input placeholder="phone type" data-bind='value: type' /></td>
+                        <td><input placeholder="phone number" data-bind='value: number' /></td>
                         <td><a href='#' data-bind='click: $root.removePhone'>Delete</a></td>
                     </tr>
                     </tbody>
@@ -39,24 +41,14 @@
 
 <p>
     <button data-bind='click: addContact'>Add a contact</button>
-    <button data-bind='click: save, enable: contacts().length > 0'>Save to JSON</button>
+    <button data-bind='click: save, enable: contacts().length > 0'>Save Contact</button>
 </p>
 
 <textarea data-bind='value: lastSavedJson' rows='5' cols='60' disabled='disabled'> </textarea>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 <script>
 
-    var initialData = [
-        { first_name: "Danny", last_name: "LaRusso", phones: [
-                { type: "Mobile", number: "(555) 121-2121" },
-                { type: "Home", number: "(555) 123-4567"}]
-        },
-        { first_name: "Sensei", last_name: "Miyagi", phones: [
-                { type: "Mobile", number: "(555) 444-2222" },
-                { type: "Home", number: "(555) 999-1212"}]
-        }
-    ];
+    var initialData = [];
 
     var ContactsModel = function(contacts) {
         var self = this;
@@ -87,16 +79,7 @@
             $.each(self.contacts(), function() { this.phones.remove(phone) })
         };
 
-
-
-        // $.post("/test", contacts, function(returnedData) {
-        //     alert(1231)
-        //     // This callback is executed if the post was successful
-        // })
-
         self.save = function() {
-            console.log(ko.toJS(self.contacts))
-            // console.log(ko.toJS(self.contacts)/*, null, 2*/)
             var contacts = ko.toJS(self.contacts);
             $.ajax({
                 type: "POST",
@@ -111,11 +94,6 @@
             });
 
 
-
-
-
-
-            // self.lastSavedJson(JSON.stringify(ko.toJS(self.contacts), null, 2));
         };
 
         self.lastSavedJson = ko.observable("")
