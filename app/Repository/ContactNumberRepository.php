@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactNumberRepository implements ContactNumberInterface {
 
-    //TODO: impelemnt interface
-
     private $contactNumberModel;
 
     public function __construct(ContactNumber $contactNumberModel)
@@ -18,7 +16,7 @@ class ContactNumberRepository implements ContactNumberInterface {
     }
 
 
-    public function create($contact_id, $number, $type): ?Model
+    public function store($contact_id, $type, $number): ?Model
     {
         return $this->contactNumberModel->create([
             'contact_id' => $contact_id,

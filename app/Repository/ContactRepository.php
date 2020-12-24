@@ -18,10 +18,10 @@ class ContactRepository implements ContactInterface {
 
     public function all(): ?Collection
     {
-        // TODO: Implement all() method.
+        return $this->contactModel->all();
     }
 
-    public function create(array $attributes): ?Model
+    public function store(array $attributes): ?Model
     {
         return $this->contactModel->create([
             'first_name' => $attributes['first_name'],

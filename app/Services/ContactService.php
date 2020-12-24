@@ -27,10 +27,10 @@ class ContactService{
 
     public function getAllContacts()
     {
-
+        return $this->contactRepository->all();
     }
 
-    public function createContacts($attributes)
+    public function storeContacts($attributes)
     {
         DB::beginTransaction();
 
@@ -38,11 +38,15 @@ class ContactService{
 
             foreach ($attributes['contacts'] as $attribute) {
 
-               $contact = $this->contactRepository->create($attribute);
+               $contact = $this->contactRepository->store($attribute);
 
-               foreach ($attribute['phones'] as $phone){
+               if (array_key_exists('phones', $attribute)){
 
-                   $this->contactNumberRepository->create($contact->id, $phone['type'] , $phone['number']);
+                   foreach ($attribute['phones'] as $phone){
+
+                       $this->contactNumberRepository->store($contact->id, $phone['type'] , $phone['number']);
+
+                   }
 
                }
 
