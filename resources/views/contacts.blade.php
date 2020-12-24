@@ -16,7 +16,7 @@
 @endif
 
 
-@if($contacts)
+@if($contacts->isNotEmpty())
 
 <table class="table">
     <tbody>
