@@ -36,7 +36,7 @@
                     </td>
                 @endforeach
             @else
-                <td><ul><p class="">Contact doesnt have numbers</p></ul></td>
+                <td><ul><p class="">Contact doesnt have numbers </p></ul></td>
             @endif
 
     @endforeach
