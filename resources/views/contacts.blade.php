@@ -1,51 +1,50 @@
-@extends('layouts.home')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
+<head>
+    <title>Contacts</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
 
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table mr-1"></i>
-                <h1>Contacts</h1>
-            </div>
+<!-- As a link -->
+@if(Auth::user()->role->name == 'admin')
+    <nav class="navbar navbar-dark bg-dark">
+        <a class=" navbar-brand btn btn-primary" style="width: 100px" href="\contacts\create">Admin</a>
+        <a class=" navbar-brand btn btn-primary" style="width: 100px" href="\contacts\create">Admin</a>
+        <a class=" navbar-brand btn btn-primary" style="width: 100px" href="\contacts\create">Admin</a>
 
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr class="text-center">
-                            <th>First name</th>
-                            <th>Last name</th>
+    </nav>
+@endif
 
-                        </tr>
-                        </thead>
 
-                        <tbody>
+@if($contacts)
 
-                        @foreach($contacts as $contact)
+<table class="table">
+    <tbody>
+    @foreach($contacts as $contact)
 
-                            <tr>
-                                <td class="text-center" >{{$contact->first_name}}</td>
-                                <td class="text-center">{{$contact->last_name}}</td>
-                            @if($contact->numbers)
-                                @foreach($contact->numbers as $phone)
-                                    <td>
-                                        <ul>
-                                            <li>Phone Type: {{$phone->type}}</li>
-                                            <li>Number: {{$phone->phone_number}}</li>
-                                        </ul>
-                                    </td>
-                                @endforeach
-                            @else
-                                <td>User doesnt have number</td>
-                            @endif
-                        @endforeach
-                        </tbody>
+        <tr class="thead-dark">
+        <th scope="row">{{$contact->id}}</th>
+        <td>F.Name: {{$contact->first_name}}</td>
+        <td>L.Name: {{$contact->last_name}}</td>
+            @if($contact->numbers)
+                @foreach($contact->numbers as $phone)
+                    <td>
+                        <ul>
+                            <li>Phone Type: {{$phone->type}}</li>
+                            <li>Number: {{$phone->phone_number}}</li>
+                        </ul>
+                    </td>
+                @endforeach
+            @else
+                <td>User doesnt have number</td>
+            @endif
+        @endforeach
+@else
+    <h1 class="text-center">No contacts</h1>
+@endif
+      </tr>
+    </tbody>
+</table>
 
-                    </table>
-
-                </div>
-            </div>
-        </div>
-        </div>
-
-@stop
+</html>
