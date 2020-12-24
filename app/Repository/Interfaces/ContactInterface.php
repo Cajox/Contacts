@@ -10,6 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 interface ContactInterface{
 
     public function all(): ?Collection;
-    public function create(array $attributes): ?Model;
+    public function store(array $attributes): ?Model;
 
 }

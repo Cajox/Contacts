@@ -18,15 +18,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" href="\contacts\all">Home</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-{{--                @if($_SESSION['user']['role'] == 'admin')--}}
-                    <li><a href="">Admin</a></li>
-{{--                @endif--}}
+                @if(Auth::user()->role->name == 'admin')
+                    <li><a href="\contacts\create">Admin</a></li>
+                @endif
             </ul>
         </div>
     </div>

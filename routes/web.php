@@ -22,9 +22,6 @@ Route::get('/test', function () {
     return view('admin.index');
 });
 
-Route::get('/tesst', function () {
-    return view('contacts');
-});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -32,5 +29,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::prefix('contacts')->group(function (){
     Route::get('/all', [ContactController::class, 'getAllContacts']);
-    Route::post('/create', [ContactController::class, 'createContact']);
+    Route::get('/create', [ContactController::class, 'createContact'])->middleware('admin');
+    Route::post('/store', [ContactController::class, 'storeContacts'])->middleware('admin');
 });
