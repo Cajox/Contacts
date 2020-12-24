@@ -18,6 +18,11 @@ class ContactController extends Controller
         $this->contactService = $contactService;
     }
 
+    public function createContact()
+    {
+        return view('admin.index');
+    }
+
     public function getAllContacts()
     {
         $contacts = $this->contactService->getAllContacts();
@@ -26,9 +31,9 @@ class ContactController extends Controller
 
     }
 
-    public function createContact(CreateContactRequest $request)
+    public function storeContacts(CreateContactRequest $request)
     {
-        return $this->contactService->createContacts($request->all());
+        return $this->contactService->storeContacts($request->all());
     }
 
 }

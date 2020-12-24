@@ -18,7 +18,7 @@ class ContactNumberRepository implements ContactNumberInterface {
     }
 
 
-    public function create($contact_id, $type, $number): ?Model
+    public function store($contact_id, $type, $number): ?Model
     {
         return $this->contactNumberModel->create([
             'contact_id' => $contact_id,

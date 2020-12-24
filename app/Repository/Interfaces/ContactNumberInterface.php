@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 interface ContactNumberInterface{
 
-    public function create(int $contact_id, string $number, string $type): ?Model;
+    public function store(int $contact_id, string $number, string $type): ?Model;
 
 }

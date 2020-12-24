@@ -34,7 +34,7 @@
     var contacts = ko.toJS(self.contacts);
     $.ajax({
     type: "POST",
-    url: '/contacts/create',
+    url: '/contacts/store',
     data: { contacts,  "_token": $('#csrf-token')[0].content },
     success: function () {
         $("#res").text('Successfully added contact');
