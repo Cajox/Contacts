@@ -20,7 +20,7 @@ class ContactController extends Controller
 
     public function createContact()
     {
-        return view('admin.index');
+        return view('admin.create-contact');
     }
 
     public function getAllContacts()

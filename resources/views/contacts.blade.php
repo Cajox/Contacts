@@ -7,11 +7,10 @@
 </head>
 
 <!-- As a link -->
-@if(Auth::user()->role->name == 'admin')
+@if(Auth::check() && Auth::user()->role->name == 'admin')
     <nav class="navbar navbar-dark bg-dark">
-        <a class=" navbar-brand btn btn-primary" style="width: 100px" href="\contacts\create">Admin</a>
-        <a class=" navbar-brand btn btn-primary" style="width: 100px" href="\contacts\create">Admin</a>
-        <a class=" navbar-brand btn btn-primary" style="width: 100px" href="\contacts\create">Admin</a>
+        <a class=" navbar-brand btn btn-outline-danger" style="width: 100px" href="\dashboard">Home</a>
+        <a class=" navbar-brand btn btn-outline-info" style="width: 100px" href="\contacts\create">Admin</a>
 
     </nav>
 @endif
@@ -25,9 +24,9 @@
 
         <tr class="thead-dark">
         <th scope="row">{{$contact->id}}</th>
-        <td>F.Name: {{$contact->first_name}}</td>
-        <td>L.Name: {{$contact->last_name}}</td>
-            @if($contact->numbers)
+        <td><b>Name</b>: {{$contact->first_name}}</td>
+        <td><b>Surname</b>: {{$contact->last_name}}</td>
+            @if($contact->numbers->isNotEmpty())
                 @foreach($contact->numbers as $phone)
                     <td>
                         <ul>
@@ -37,9 +36,10 @@
                     </td>
                 @endforeach
             @else
-                <td>User doesnt have number</td>
+                <td><ul><p class="">Contact doesnt have numbers</p></ul></td>
             @endif
-        @endforeach
+
+    @endforeach
 @else
     <h1 class="text-center">No contacts</h1>
 @endif
