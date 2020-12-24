@@ -28,7 +28,7 @@ class CreateContactRequest extends FormRequest
         return [
             'contacts.*.first_name' => 'required|string',
             'contacts.*.last_name' => 'required|string',
-            'contacts.*.phones.*.number' => 'integer',
+            'contacts.*.phones.*.number' => 'string',
             'contacts.*.phones.*.type' => 'string',
         ];
     }
