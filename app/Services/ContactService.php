@@ -27,7 +27,7 @@ class ContactService{
 
     public function getAllContacts()
     {
-
+        return $this->contactRepository->all();
     }
 
     public function createContacts($attributes)

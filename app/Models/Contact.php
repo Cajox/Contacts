@@ -11,4 +11,10 @@ class Contact extends Model
 
     protected $fillable = ['first_name', 'last_name'];
 
+    public function numbers(){
+
+        return $this->hasMany(ContactNumber::class);
+
+    }
+
 }

@@ -2,14 +2,10 @@
 
 @section('content')
 
-
-{{--
-    @if($kursevi->isNotEmpty())
---}}
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
-                Tabela Svih kurseva
+                <h1>Contacts</h1>
             </div>
 
             <div class="card-body">
@@ -17,45 +13,38 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr class="text-center">
-                            <th>Ime Kursa</th>
-                            <th>Minimalan uzrast</th>
-                            <th>Opis</th>
-                            <th></th>
+                            <th>First name</th>
+                            <th>Last name</th>
+
                         </tr>
                         </thead>
 
                         <tbody>
 
-{{--                        @foreach($kursevi as $kurs)
+                        @foreach($contacts as $contact)
 
-                            <tr >
-                                <td class="text-center" >{{$kurs->name}}</td>
-                                <td class="text-center">{{$kurs->min_age}}</td>
-                                <td class="text-center">{{$kurs->description}}</td>
-                                <td class="text-center">
-                                    <a href="{{route('course.edit', $kurs->id)}}" class=" btn btn-dark text-center">
-                                        Edit
-                                    </a>
-                                </td>
-                            </tr>
-
-                        @endforeach--}}
-{{--
-                        @endif
---}}
+                            <tr>
+                                <td class="text-center" >{{$contact->first_name}}</td>
+                                <td class="text-center">{{$contact->last_name}}</td>
+                            @if($contact->numbers)
+                                @foreach($contact->numbers as $phone)
+                                    <td>
+                                        <ul>
+                                            <li>Phone Type: {{$phone->type}}</li>
+                                            <li>Number: {{$phone->phone_number}}</li>
+                                        </ul>
+                                    </td>
+                                @endforeach
+                            @else
+                                <td>User doesnt have number</td>
+                            @endif
+                        @endforeach
                         </tbody>
 
                     </table>
 
                 </div>
             </div>
-        </div>
-
-        <div style="padding-top: 20px">
-            <a class="nav-link text-center btn btn-info col-sm-6 offset-3" href="{{--{{route('course.index')}}--}}">
-                <div class="sb-nav-link-icon"><i class=""></i></div>
-                Kreirajte kurs
-            </a>
         </div>
         </div>
 

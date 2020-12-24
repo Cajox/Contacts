@@ -20,6 +20,9 @@ class ContactController extends Controller
 
     public function getAllContacts()
     {
+        $contacts = $this->contactService->getAllContacts();
+
+        return view('contacts', compact('contacts'));
 
     }
 
