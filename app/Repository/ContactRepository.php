@@ -11,24 +11,37 @@ class ContactRepository implements ContactInterface {
 
     private $contactModel;
 
+    /**
+     * ContactRepository constructor.
+     * @param Contact $contactModel
+     */
     public function __construct(Contact $contactModel)
     {
         $this->contactModel = $contactModel;
     }
 
-    public function all(): ?Collection
+    /**
+     * Get all Contacts
+     *
+     * @return Collection
+     */
+    public function all() : Collection
     {
         return $this->contactModel->all();
     }
 
-    public function store(array $attributes): ?Model
+    /**
+     * Store Contact
+     *
+     * @param array $attributes
+     * @return Model
+     */
+    public function store(array $attributes) : Model
     {
         return $this->contactModel->create([
             'first_name' => $attributes['first_name'],
             'last_name' => $attributes['last_name']
         ]);
-
-
     }
 
 

@@ -6,10 +6,9 @@ namespace App\Repository\Interfaces;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-
 interface ContactInterface{
 
-    public function all(): ?Collection;
-    public function store(array $attributes): ?Model;
+    public function all() : Collection;
+    public function store(array $attributes) : Model;
 
 }

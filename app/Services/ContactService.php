@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Repository\ContactNumberRepository;
 use App\Repository\ContactRepository;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -19,52 +21,56 @@ class ContactService{
      */
     private $contactNumberRepository;
 
+    /**
+     * ContactService constructor.
+     * @param ContactRepository $contactRepository
+     * @param ContactNumberRepository $contactNumberRepository
+     */
     public function __construct(ContactRepository $contactRepository, ContactNumberRepository $contactNumberRepository)
     {
         $this->contactRepository = $contactRepository;
         $this->contactNumberRepository = $contactNumberRepository;
     }
 
-    public function getAllContacts()
+    /**
+     * Get all Contacts
+     *
+     * @return Collection
+     */
+    public function getAllContacts() : Collection
     {
         return $this->contactRepository->all();
     }
 
-    public function storeContacts($attributes)
+    /**
+     * Store Contacts
+     *
+     * @param array $attributes
+     * @return JsonResponse
+     */
+    public function storeContacts(array $attributes) : JsonResponse
     {
         DB::beginTransaction();
 
         try {
+            if (isset($attributes)){
+                foreach ($attributes['contacts'] as $attribute) {
+                    $contact = $this->contactRepository->store($attribute);
 
-            foreach ($attributes['contacts'] as $attribute) {
+                    if (array_key_exists('phones', $attribute)){
+                        foreach ($attribute['phones'] as $phone){
+                            $this->contactNumberRepository->store($contact->id, $phone['type'] , $phone['number']);
+                        }
+                    }
+                }
 
-               $contact = $this->contactRepository->store($attribute);
-
-               if (array_key_exists('phones', $attribute)){
-
-                   foreach ($attribute['phones'] as $phone){
-
-                       $this->contactNumberRepository->store($contact->id, $phone['type'] , $phone['number']);
-
-                   }
-
-               }
-
+                DB::commit();
+                return response()->json(null, 201);
             }
-
-            DB::commit();
-
-            return true;
-
+            return response()->json(["No content"], 204);
         } catch (Exception $e) {
-
             DB::rollback();
-
-            return response(["error" => $e->getMessage()]);
-
+            return response()->json(["error" => $e->getMessage()]);
         }
-
     }
-
-
 }
